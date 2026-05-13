@@ -7,7 +7,7 @@ from services.report_service import ReportService
 
 def get_reports_dir():
     """Raporlar ana klasörünü oluştur ve döndür."""
-    base = os.path.join(os.path.dirname(os.path.dirname(__file__)), "reports")
+    base = os.path.join(os.path.dirname(os.path.dirname(__file__)), "raporlar")
     haftalik = os.path.join(base, "haftalik")
     aylik    = os.path.join(base, "aylik")
     os.makedirs(haftalik, exist_ok=True)
