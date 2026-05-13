@@ -42,13 +42,15 @@ class MovementDialog(BaseDialog):
             self.product_combo.addItem(f"{p.sku} - {p.name}", p.id)
         layout.addRow("Ürün *", self.product_combo)
 
-        self.from_label = self._lbl("Çıkış Lokasyonu *")
+        self.from_label = QLabel("Çıkış Lokasyonu *")
+        self.from_label.setStyleSheet("color: #111111; font-size: 13px;")
         self.from_combo = QComboBox()
         for loc in self.locations:
             self.from_combo.addItem(loc.code, loc.id)
         layout.addRow(self.from_label, self.from_combo)
 
-        self.to_label = self._lbl("Giriş Lokasyonu *")
+        self.to_label = QLabel("Giriş Lokasyonu *")
+        self.to_label.setStyleSheet("color: #111111; font-size: 13px;")
         self.to_combo = QComboBox()
         for loc in self.locations:
             self.to_combo.addItem(loc.code, loc.id)
@@ -95,23 +97,28 @@ class MovementDialog(BaseDialog):
         self._on_type_changed("IN")
 
     def _on_type_changed(self, movement_type):
+        style = "color: #111111; font-size: 13px;"
         if movement_type == "IN":
             self.from_label.hide()
             self.from_combo.hide()
             self.to_label.setText("Giriş Lokasyonu *")
+            self.to_label.setStyleSheet(style)
             self.to_label.show()
             self.to_combo.show()
         elif movement_type == "OUT":
             self.from_label.setText("Çıkış Lokasyonu *")
+            self.from_label.setStyleSheet(style)
             self.from_label.show()
             self.from_combo.show()
             self.to_label.hide()
             self.to_combo.hide()
         elif movement_type == "TRANSFER":
             self.from_label.setText("Çıkış Lokasyonu *")
+            self.from_label.setStyleSheet(style)
             self.from_label.show()
             self.from_combo.show()
             self.to_label.setText("Giriş Lokasyonu *")
+            self.to_label.setStyleSheet(style)
             self.to_label.show()
             self.to_combo.show()
 
