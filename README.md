@@ -232,6 +232,7 @@ openpyxl>=3.1.0
 reportlab>=4.0.0
 python-dateutil>=2.9.0
 six>=1.16.0
+python-dotenv>=1.0.0
 ```
 
 ---
