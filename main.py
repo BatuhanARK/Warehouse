@@ -2,9 +2,9 @@ from models.base import create_tables
 from utils.scheduler import start_scheduler
 
 # SEED VERİ OLUŞTURMAK İÇİN:
-# from utils.scheduler import generate_weekly_report, generate_monthly_report
-# generate_weekly_report()
-# generate_monthly_report()
+from utils.scheduler import generate_weekly_report, generate_monthly_report
+generate_weekly_report()
+generate_monthly_report()
 
 if __name__ == "__main__":
     create_tables()

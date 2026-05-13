@@ -78,7 +78,7 @@ class MainWindow(QMainWindow):
         title = QLabel("🏭 WMS")
         title.setAlignment(Qt.AlignCenter)
         title.setObjectName("sidebarTitle")
-        title.setFixedHeight(70)
+        title.setFixedHeight(100)
         layout.addWidget(title)
 
         self.nav_buttons = []
@@ -127,7 +127,7 @@ class MainWindow(QMainWindow):
             }
             #sidebarTitle {
                 color: white;
-                font-size: 20px;
+                font-size: 30px;
                 font-weight: bold;
                 background-color: #152d54;
                 padding: 10px;
