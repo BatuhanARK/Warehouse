@@ -74,6 +74,27 @@ def seed():
                 lokasyonlar.append(loc)
     session.commit()
     print(f"✅ {len(lokasyonlar)} lokasyon hazır.")
+    
+    # ── Başlangıç Stoğu ──────────────────────────────────────
+    print("Başlangıç stoğu ekleniyor...")
+    for musteri in musteriler:
+        for urun in urunler:
+            for lokasyon in lokasyonlar[:6]:  # Her üründen 6 lokasyona stok
+                stock = session.query(Stock).filter_by(
+                    customer_id=musteri.id,
+                    product_id=urun.id,
+                    location_id=lokasyon.id
+                ).first()
+                if not stock:
+                    stock = Stock(
+                        customer_id=musteri.id,
+                        product_id=urun.id,
+                        location_id=lokasyon.id,
+                        quantity=Decimal("5000")
+                    )
+                    session.add(stock)
+    session.commit()
+    print("✅ Başlangıç stoğu eklendi.")
 
     # ── Hareketler ───────────────────────────────────────────
     bugun        = date.today()
@@ -123,7 +144,8 @@ def seed():
             urun     = random.choice(urunler)
             lokasyon = random.choice(lokasyonlar)
             miktar   = Decimal(str(random.randint(5, 100)))
-            mv_type  = random.choice(["IN", "TRANSFER", "OUT"])  # IN ağırlıklı
+            # IN: ~%45, OUT: ~%40, TRANSFER: ~%15
+            mv_type = random.choices(["IN", "OUT", "TRANSFER"], weights=[45, 40, 15])[0]
 
             # Stok kontrolü
             stock = session.query(Stock).filter_by(

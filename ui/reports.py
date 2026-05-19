@@ -482,10 +482,12 @@ class ReportsWidget(QWidget):
         if not hasattr(self, "mov_data") or not self.mov_data:
             QMessageBox.warning(self, "Uyarı", "Önce raporu oluşturun.")
             return
+        start  = self._get_date(self.mov_start).strftime("%d-%m-%Y")
+        end    = self._get_date(self.mov_end).strftime("%d-%m-%Y")
+        tip    = self.mov_type_filter.currentText()
+        fname  = f"{start}_{end}_{tip}_HAREKET-RAPORU.pdf"
         path, _ = QFileDialog.getSaveFileName(
-            self, "PDF Kaydet", "hareket_raporu.pdf",
-            "PDF Files (*.pdf)"
-        )
+            self, "PDF Kaydet", fname, "PDF Files (*.pdf)")
         if path:
             try:
                 self.report_service.export_movements_pdf(self.mov_data, path)
@@ -497,10 +499,10 @@ class ReportsWidget(QWidget):
         if not hasattr(self, "stock_data") or not self.stock_data:
             QMessageBox.warning(self, "Uyarı", "Önce raporu oluşturun.")
             return
+        musteri = self.stock_customer_filter.currentText()
+        fname   = f"{musteri}_STOK-RAPORU.pdf"
         path, _ = QFileDialog.getSaveFileName(
-            self, "PDF Kaydet", "stok_raporu.pdf",
-            "PDF Files (*.pdf)"
-        )
+            self, "PDF Kaydet", fname, "PDF Files (*.pdf)")
         if path:
             try:
                 self.report_service.export_stock_pdf(self.stock_data, path)
@@ -512,10 +514,12 @@ class ReportsWidget(QWidget):
         if not hasattr(self, "cust_data") or not self.cust_data:
             QMessageBox.warning(self, "Uyarı", "Önce raporu oluşturun.")
             return
+        musteri = self.cust_filter.currentText()
+        start   = self._get_date(self.cust_start).strftime("%d-%m-%Y")
+        end     = self._get_date(self.cust_end).strftime("%d-%m-%Y")
+        fname   = f"{musteri}_{start}_{end}_HAREKET-RAPORU.pdf"
         path, _ = QFileDialog.getSaveFileName(
-            self, "PDF Kaydet", "musteri_raporu.pdf",
-            "PDF Files (*.pdf)"
-        )
+            self, "PDF Kaydet", fname, "PDF Files (*.pdf)")
         if path:
             try:
                 self.report_service.export_movements_pdf(self.cust_data, path)
@@ -528,10 +532,12 @@ class ReportsWidget(QWidget):
         if not hasattr(self, "mov_data") or not self.mov_data:
             QMessageBox.warning(self, "Uyarı", "Önce raporu oluşturun.")
             return
+        start  = self._get_date(self.mov_start).strftime("%d-%m-%Y")
+        end    = self._get_date(self.mov_end).strftime("%d-%m-%Y")
+        tip    = self.mov_type_filter.currentText()  # Tümü, IN, OUT, TRANSFER
+        fname  = f"{start}_{end}_{tip}_HAREKET-RAPORU.xlsx"
         path, _ = QFileDialog.getSaveFileName(
-            self, "Excel Kaydet", "hareket_raporu.xlsx",
-            "Excel Files (*.xlsx)"
-        )
+            self, "Excel Kaydet", fname, "Excel Files (*.xlsx)")
         if path:
             try:
                 self.report_service.export_movements_excel(self.mov_data, path)
@@ -543,10 +549,10 @@ class ReportsWidget(QWidget):
         if not hasattr(self, "stock_data") or not self.stock_data:
             QMessageBox.warning(self, "Uyarı", "Önce raporu oluşturun.")
             return
+        musteri = self.stock_customer_filter.currentText()
+        fname   = f"{musteri}_STOK-RAPORU.xlsx"
         path, _ = QFileDialog.getSaveFileName(
-            self, "Excel Kaydet", "stok_raporu.xlsx",
-            "Excel Files (*.xlsx)"
-        )
+            self, "Excel Kaydet", fname, "Excel Files (*.xlsx)")
         if path:
             try:
                 self.report_service.export_stock_excel(self.stock_data, path)
@@ -558,10 +564,12 @@ class ReportsWidget(QWidget):
         if not hasattr(self, "cust_data") or not self.cust_data:
             QMessageBox.warning(self, "Uyarı", "Önce raporu oluşturun.")
             return
+        musteri = self.cust_filter.currentText()
+        start   = self._get_date(self.cust_start).strftime("%d-%m-%Y")
+        end     = self._get_date(self.cust_end).strftime("%d-%m-%Y")
+        fname   = f"{musteri}_{start}_{end}_HAREKET-RAPORU.xlsx"
         path, _ = QFileDialog.getSaveFileName(
-            self, "Excel Kaydet", "musteri_raporu.xlsx",
-            "Excel Files (*.xlsx)"
-        )
+            self, "Excel Kaydet", fname, "Excel Files (*.xlsx)")
         if path:
             try:
                 self.report_service.export_movements_excel(self.cust_data, path)
